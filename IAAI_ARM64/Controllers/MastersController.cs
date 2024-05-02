@@ -72,6 +72,28 @@ namespace IAAI_ARM64.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (file != null && file.ContentLength > 0)
+                {
+                    // 使用 GUID 生成文件名
+                    string path = Server.MapPath("~/Upload/");
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    //確認路徑存在
+                    if (!Directory.Exists(path))
+                    {   // 如果不存在，創建資料夾
+                        Directory.CreateDirectory(path);
+                    }
+                    // 保存文件
+                    file.SaveAs(Path.Combine(path, fileName));
+                    master.Photo = fileName;
+                    //設置TempData來傳遞上傳成功的消息
+                    TempData["UploadSuccess"] = "檔案上傳成功!";
+
+                }
+                else
+                {
+                    TempData["UploadError"] = "Please select a file to upload.";
+                }
+
                 var sanitizer = new HtmlSanitizer();//使用Ganss.Xss套件,防止XSS攻擊
                 master.Experience = sanitizer.Sanitize(master.Experience);
                 master.Education = sanitizer.Sanitize(master.Education);

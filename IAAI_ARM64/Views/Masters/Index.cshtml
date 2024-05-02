@@ -10,6 +10,16 @@
 <p>
     @Html.ActionLink("新增專家", "Create")
 </p>
+@if (TempData["UploadSuccess"] != null)
+{
+    <div class="alert alert-success">@TempData["UploadSuccess"].ToString()</div>
+}
+
+@if (TempData["UploadError"] != null)
+{
+    <div class="alert alert-danger">@TempData["UploadError"].ToString()</div>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -22,8 +32,8 @@
             @Html.DisplayNameFor(model => model.Photo)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Experience)
-        </th>*@
+                @Html.DisplayNameFor(model => model.Experience)
+            </th>*@
         <th></th>
     </tr>
 
@@ -41,8 +51,8 @@
                 @*@Html.DisplayFor(modelItem => item.Photo)*@
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.Experience)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.Experience)
+                </td>*@
             <td>
                 @Html.ActionLink("編輯", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("詳細", "Details", new { id = item.Id }) |
@@ -52,13 +62,4 @@
     }
 
 </table>
-@if (TempData["UploadSuccess"] != null)
-{
-    <div class="alert alert-success">@TempData["UploadSuccess"].ToString()</div>
-}
-
-@if (TempData["UploadError"] != null)
-{
-    <div class="alert alert-danger">@TempData["UploadError"].ToString()</div>
-}
 
