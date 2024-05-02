@@ -1,0 +1,137 @@
+﻿@model IAAI_ARM64.Models.Master
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/DashboardTemplate.cshtml";
+}
+
+<h2>編輯頁面</h2>
+
+<form action="@Url.Action("Edit", "Masters")" method="post" enctype="multipart/form-data" class="form-horizontal">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+   
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2 edit-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-2 edit-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Education, htmlAttributes: new { @class = "control-label col-md-2 edit-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Education, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Education, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Introduction, htmlAttributes: new { @class = "control-label col-md-2 edit-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Introduction, new {@class = "form-control ckeditor"})
+            @Html.ValidationMessageFor(model => model.Introduction, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Experience, new { @class = "control-label col-md-2 edit-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Experience, new { @class = "form-control ckeditor" })
+            @Html.ValidationMessageFor(model => model.Experience)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Detail, new { @class = "control-label col-md-2 edit-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Detail, new { @class = "form-control ckeditor" })
+            @Html.ValidationMessageFor(model => model.Detail)
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-2 edit-label" })
+            <div class="col-md-10">
+                <input type="file" class="form-control-file" id="file" name="file">
+                @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Photo, new { @class = "control-label col-md-2 edit-label" })
+        <div class="col-md-10">
+            <input type="file" id="file" name="file" />
+            @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+        <br />
+        <br />
+            <img id="imagePreview" style="max-width: 200px; max-height: 200px;" src="@Url.Content("~/Upload/" + Model.Photo)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-secondary p-2" />
+        </div>
+        <div>
+            @Html.ActionLink("回到管理頁", "Index")
+        </div>
+    </div>
+</form>
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace('Experience', { filebrowserImageUploadUrl: '/Upload/UploadPicture' });
+        CKEDITOR.replace('Detail', { filebrowserImageUploadUrl: '/Upload/UploadPicture' });
+    </script>
+    <p>預覽上傳圖片</p>
+    <script>
+        $(document).ready(function () {
+            $('#file').change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').attr('src', e.target.result); // 修改這裡
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+    </script>
+}
+
+
+
+    @*$(document).ready(function () {...});：這表示當整個網頁加載完畢後，裡面的程式碼才會執行。這是確保網頁上的元素都已經加載好，我們的程式碼才開始工作。
+
+$('#file').change(function () {...});：這行代碼綁定了一個事件處理器到id為file的元素（在這裡是指<input type="file" id="file" name="file">）。change事件會在文件輸入元素的值（即選擇的文件）發生變化時被觸發，也就是說，當用戶選擇了一個文件時，這段程式碼就會運行。
+
+if (this.files && this.files[0]) {...}：這是檢查用戶是否真的選擇了一個文件。this.files包含了所有用戶選擇的文件（因為<input type="file">元素可以設置允許多選），this.files[0]就是用戶選擇的第一個文件。
+
+var reader = new FileReader();：創建了一個FileReader物件，這是JavaScript提供的一個API，用於讀取用戶電腦上的文件。
+
+reader.onload = function (e) {...};：這是設置FileReader的onload事件的處理函數。當FileReader讀取完文件後，onload事件會被觸發，並執行這裡的代碼。e.target.result包含了讀取到的文件內容，對於圖片文件來說，這會是一個以data:image開頭的URL，包含了圖片的實際數據。
+
+$('#imagePreview').attr('src', e.target.result);：這行代碼會將id為imagePreview的<img>標籤的src屬性設置為讀取到的圖片數據URL。因此，這個<img>元素就會顯示出用戶選擇的圖片，作為預覽。
+
+reader.readAsDataURL(this.files[0]);：最後，這行代碼告訴FileReader開始讀取用戶選擇的第一個文件，讀取完成後會自動觸發上面設定的onload事件，並執行相關代碼來更新圖片預覽。*@
+
+ 

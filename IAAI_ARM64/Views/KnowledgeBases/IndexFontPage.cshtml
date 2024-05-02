@@ -1,0 +1,92 @@
+﻿@model IEnumerable<IAAI_ARM64.Models.KnowledgeBase>
+
+@{
+    ViewBag.Title = "IndexFontPage";
+    Layout = "~/Views/Shared/FontKnowledge.cshtml";
+}
+
+
+
+<div id="banner-area" class="banner-area" style="background-image: url(../HTML/Images/banner-bg.jpg)">
+    <!-- Subpage title start -->
+    <div class="banner-text text-right">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="breadcrumb">
+                        <li>首頁</li>
+                        <li>知識庫</li>
+                        <li><a href="#"> 知識庫下載</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Subpage title end -->
+</div>
+<!-- Banner area end -->
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title"><i class="fa fa-folder-open-o">&nbsp;</i>知識庫</h2>
+                        <ul class="arrow nav nav-tabs nav-stacked">
+                            <li class="active"><a href="#">知識庫下載</a></li>
+                        </ul>
+                    </div>
+                    <!-- Categories end -->
+                </div>
+                <!-- Sidebar end -->
+            </div>
+            <!-- Sidebar Col end -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <h2 class="page-title">知識庫下載</h2>
+                <hr class="botmargin-min">
+                <!-- 內容開始 -->
+                @*<h2>IndexFontPage</h2>
+
+                <p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>*@
+                <table class="table table-striped career-table download-table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.InitDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Download)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.Raw(item.InitDate.ToString("yyyy-MM-dd"))
+                                @*@Html.DisplayFor(modelItem => item.InitDate)*@
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                <a href="@Html.DisplayFor(modelItem => item.Download)" class="btn btn-primary"><i class="fa fa-download"></i> 下載</a>
+                            </td>
+
+                        </tr>
+                    }
+
+                </table>
+                <!-- 內容結束 -->
+
+            </div>
+            <!-- Main row end -->
+        </div>
+        <!-- Conatiner end -->
+    </div>
+</section>

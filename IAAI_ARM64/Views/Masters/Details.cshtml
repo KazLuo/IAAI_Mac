@@ -1,0 +1,78 @@
+﻿@model IAAI_ARM64.Models.Master
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/DashboardTemplate.cshtml";
+}
+
+<h2>專家詳細頁</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            <div class="card">
+                @Html.DisplayFor(model => model.Name)
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+
+        <dd>
+            <div class="card">
+                @Html.DisplayFor(model => model.Position)
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+
+        <dd>
+
+            @*@Html.DisplayFor(model => model.Photo)*@
+            <img id="imagePreview" style="max-width: 150px; max-height: 150px;" src="@Url.Content("~/Upload/" + Model.Photo)" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Experience)
+        </dt>
+        <dd>
+            <div class="card">
+                @Html.Raw(Model.Experience)
+                @*@Html.DisplayFor(model => model.Experience)*@
+            </div>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Education)
+        </dt>
+
+        <dd>
+            <div class="card">
+                @Html.DisplayFor(model => model.Education)
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Detail)
+        </dt>
+
+        <dd>
+            <div class="card">
+                @Html.Raw(Model.Detail)
+            </div>
+            @*@Html.DisplayFor(model => model.Detail)*@
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("編輯", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("回到管理頁面", "Index")
+</p>

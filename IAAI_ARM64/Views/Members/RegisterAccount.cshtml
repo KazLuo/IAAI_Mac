@@ -1,0 +1,357 @@
+﻿@model IAAI_ARM64.Models.Register_VM
+@using CaptchaMvc.HtmlHelpers
+@{
+    ViewBag.Title = "RegisterAccount";
+    Layout = "~/Views/Shared/FontKnowledge.cshtml";
+}
+
+
+<div id="banner-area" class="banner-area" style="background-image:url(../HTML/images/banner-bg.jpg)">
+    <!-- Subpage title start -->
+    <div class="banner-text text-right">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="breadcrumb">
+                        <li>首頁</li>
+                        <li>會員專區</li>
+                        <li><a href="#"> 會員註冊</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Subpage title end -->
+</div>
+
+<!-- Banner area end -->
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title"><i class="fa fa-folder-open-o">&nbsp;</i>會員專區</h2>
+                        <ul class="arrow nav nav-tabs nav-stacked">
+                            <li><a href="#">檔案下載</a></li>
+                            <li class="active"><a href="#">會員註冊</a></li>
+                        </ul>
+                    </div>
+                    <!-- Categories end -->
+                </div>
+                <!-- Sidebar end -->
+            </div>
+            <!-- Sidebar Col end -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <h2 class="page-title">會員註冊</h2>
+                <hr class="botmargin-min">
+
+
+                <!-- 內容開始 -->
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal" role="form">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Members.Account)</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(model => model.Members.Account, new { @class = "form-control", placeholder = "請輸入帳號" })
+                            </div>
+                            <div class="col-sm-3">
+
+                                @if (!Html.ViewData.ModelState.IsValidField("Members.Account"))
+                                {
+                                    <span class="alertred">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Members.Account, "", new { @class = "text-danger" })
+                                    </span>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Members.Password)</label>
+                            <div class="col-sm-7">
+                                @Html.PasswordFor(model => model.Members.Password, new { @class = "form-control", placeholder = "請輸入密碼" })
+                            </div>
+                            <div class="col-sm-3">
+                                <span class="alertred">
+                                    @if (!Html.ViewData.ModelState.IsValidField("Members.Password"))
+                                    {
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Members.Password, "", new { @class = "text-danger" })
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Members.Name)</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(model => model.Members.Name, new { @class = "form-control", placeholder = "請輸入姓名" })
+                            </div>
+                            <div class="col-sm-3">
+                                @if (!Html.ViewData.ModelState.IsValidField("Members.Name"))
+                                {
+                                    <span class="alertred">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Members.Name, "", new { @class = "text-danger" })
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Members.Gender)</label>
+                            <div class="col-sm-7">
+                                @Html.RadioButtonFor(model => model.Members.Gender, IAAI_ARM64.Models.EnumList.Gender.男)@Html.Label("Male", "男")
+                                @Html.RadioButtonFor(model => model.Members.Gender, IAAI_ARM64.Models.EnumList.Gender.女)@Html.Label("Female", "女")
+                            </div>
+                            @*<div class="col-sm-3">
+
+                                        <span class="alertred">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            @Html.ValidationMessageFor(model => model.Members.Gender, "", new { @class = "text-danger" })
+                                        </span>
+
+                                </div>*@
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Members.Birthday)</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(model => model.Members.Birthday, new { @class = "form-control", type = "date", placeholder = "請輸入生日" })
+                            </div>
+                            <div class="col-sm-3">
+                                <span class="alertred">
+                                    @if (!Html.ViewData.ModelState.IsValidField("Members.Birthday"))
+                                    {
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Members.Birthday, "", new { @class = "text-danger" })
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Members.ApplyType)</label>
+                            <div class="col-sm-7">
+                                @Html.RadioButtonFor(model => model.Members.ApplyType, IAAI_ARM64.Models.EnumList.ApplyType.正式會員, new { @class = "checkbox-inline checkbox01" })@Html.Label("正式會員", "正式會員")
+                                @Html.RadioButtonFor(model => model.Members.ApplyType, IAAI_ARM64.Models.EnumList.ApplyType.準會員, new { @class = "checkbox-inline checkbox01" })@Html.Label("準會員", "準會員")
+                                @Html.RadioButtonFor(model => model.Members.ApplyType, IAAI_ARM64.Models.EnumList.ApplyType.個人贊助會員, new { @class = "checkbox-inline checkbox01" })@Html.Label("個人贊助會員", "個人贊助會員")
+                                @Html.RadioButtonFor(model => model.Members.ApplyType, IAAI_ARM64.Models.EnumList.ApplyType.學生會員, new { @class = "checkbox-inline checkbox01" })@Html.Label("學生會員", "學生會員")
+                            </div>
+                            <div class="col-sm-3">
+                                @if (!Html.ViewData.ModelState.IsValidField("Members.ApplyType"))
+                                {
+                                    <span class="alertred">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Members.ApplyType, "", new { @class = "text-danger" })
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Members.Address)</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(model => model.Members.Address, new { @class = "form-control", placeholder = "請輸入通訊處" })
+                            </div>
+
+                            <div class="col-sm-3">
+                                @if (!Html.ViewData.ModelState.IsValidField("Members.Address"))
+                                {
+                                    <span class="alertred">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Members.Address, "", new { @class = "text-danger" })
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Members.Email, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(model => model.Members.Email, new { @class = "form-control", placeholder = "請輸入E-mail" })
+                            </div>
+                            <div class="col-sm-3">
+                                @if (!Html.ViewData.ModelState.IsValidField("Members.Email"))
+                                {
+                                    <span class="alertred">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Members.Email, "", new { @class = "text-danger" })
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Members.International, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-7">
+                                @Html.CheckBoxFor(model => model.Members.International, new { @class = "radiostyle01" })@Html.Label("為國際縱火調查學會之當年度有效會員，請檢附會員證影本")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Members.CurrentPosition, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(model => model.Members.CurrentPosition, new { @class = "form-control", placeholder = "請輸入現職單位" })
+                            </div>
+                            <div class="col-sm-3">
+                                @if (!Html.ViewData.ModelState.IsValidField("Members.International"))
+                                {
+                                    <span class="alertred">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Members.CurrentPosition, "", new { @class = "text-danger" })
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Members.Title, new {@class= "col-sm-2 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(model => model.Members.Title, new {@class= "form-control",placeholder= "請輸入職稱" })
+                            </div>
+                            <div class="col-sm-3">
+                                @if (!Html.ViewData.ModelState.IsValidField("Members.Title"))
+                {
+                    <span class="alertred">
+                        <i class="fa fa-exclamation-circle"></i>
+                        @Html.ValidationMessageFor(model => model.Members.Title,"", new {@class="text-danger"})
+                    </span>
+                }
+                                <span class="alertred"><i class="fa fa-exclamation-circle"></i> 職稱必填</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">最高學歷：</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" placeholder="請輸入最高學歷">
+                            </div>
+                            <div class="col-sm-3">
+                                <span class="alertred"><i class="fa fa-exclamation-circle"></i> 最高學歷必填</span>
+                            </div>
+                        </div>
+                        <div class="boxg">
+                            <h4 class="col-sm-2"><i class="fa fa-briefcase"></i> 服務經歷</h4>
+                            <!-- 服務經歷 -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">服務單位：</label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" placeholder="請輸入服務單位">
+                                </div>
+                                <div class="col-sm-3">
+                                    <!-- <span class="alertred"><i class="fa fa-exclamation-circle"></i> 服務經歷必填</span> -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">職　稱：</label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" placeholder="請輸入職稱">
+                                </div>
+                                <div class="col-sm-3">
+                                    <!-- <span class="alertred"><i class="fa fa-exclamation-circle"></i> 職稱必填</span> -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">起：</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" placeholder="年">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control" placeholder="月">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">迄：</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" placeholder="年">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control" placeholder="月">
+                                </div>
+                            </div>
+                            <!-- 服務經歷 end -->
+                            <!-- 服務經歷 -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">服務單位：</label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" placeholder="請輸入服務單位">
+                                </div>
+                                <div class="col-sm-3">
+                                    <!-- <span class="alertred"><i class="fa fa-exclamation-circle"></i> 服務經歷必填</span> -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">職　稱：</label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" placeholder="請輸入職稱">
+                                </div>
+                                <div class="col-sm-3">
+                                    <!-- <span class="alertred"><i class="fa fa-exclamation-circle"></i> 職稱必填</span> -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">起：</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" placeholder="年">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control" placeholder="月">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">迄：</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" placeholder="年">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control" placeholder="月">
+                                </div>
+                            </div>
+                            <!-- 服務經歷 end -->
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">相關年資合計：</label>
+                            <div class="col-sm-2">
+                                <input class="form-control" placeholder="年">
+                            </div>
+                            <div class="col-sm-2">
+                                <input class="form-control" placeholder="月">
+                            </div>
+                            <div class="col-sm-3">
+                                <!-- <span class="alertred"><i class="fa fa-exclamation-circle"></i> 相關年資合計必填</span> -->
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Captcha, htmlAttributes: new { @class = "col-sm-2 control-label" })
+                            <br />
+                            <div style="padding-left:120px">
+                                @Html.MathCaptcha()
+                                <p class="text-danger">  @ViewBag.ErrMessage </p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" value="註 冊" class="btn btn-primary solid blank" />
+                        </div>
+                    </div>
+
+
+
+                }
+                <div class="tags-area clearfix">
+                    <div class="share-items pull-right">
+                        <ul class="post-social-icons unstyled">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

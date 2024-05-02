@@ -1,0 +1,225 @@
+﻿@model IAAI_ARM64.Models.ContactUs
+@using CaptchaMvc.HtmlHelpers
+@{
+    ViewBag.Title = "IndexFontPage";
+    Layout = "~/Views/Shared/FontKnowledge.cshtml";
+}
+
+<div id="banner-area" class="banner-area" style="background-image:url(../HTML/images/banner-bg.jpg)">
+    <!-- Subpage title start -->
+    <div class="banner-text text-right">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="breadcrumb">
+                        <li>首頁</li>
+                        <li>聯絡我們</li>
+                        <li>
+                            <a href="#"> 聯絡我們</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Subpage title end -->
+</div>
+<!-- Banner area end -->
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title">
+                            <i class="fa fa-folder-open-o">&nbsp;</i>聯絡我們
+                        </h2>
+                        <ul class="arrow nav nav-tabs nav-stacked">
+                            <li class="active">
+                                <a href="#">聯絡我們</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Categories end -->
+                </div>
+                <!-- Sidebar end -->
+            </div>
+            <!-- Sidebar Col end -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <h2 class="page-title">聯絡我們 </h2>
+                <hr class="botmargin-min">
+                <!-- 內容開始 -->
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Name)</label>
+                            <div class="col-sm-7">
+                                @*//取代原先的EditorFor, 並加入placeholder,因為EditorFor不支援placeholder*@
+                                @*@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入姓名" } })*@
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "請輸入姓名" })
+
+                            </div>
+                            <div class="col-sm-3">
+                                @if (!Html.ViewData.ModelState.IsValidField("Name"))
+                                {
+                                    <span class="alertred">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </span>
+                                }
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                                <label class="col-sm-2 control-label"> @Html.LabelFor(model => model.Gender)</label>
+                                <div class="col-sm-7">
+                                    @Html.Label("男")
+                                    @Html.RadioButtonFor(model => model.Gender, IAAI_ARM64.Models.Gender.男)
+                                    @Html.Label("女")
+                                    @Html.RadioButtonFor(model => model.Gender, IAAI_ARM64.Models.Gender.女)
+                                    @Html.Label("其他")
+                                    @Html.RadioButtonFor(model => model.Gender, IAAI_ARM64.Models.Gender.其他)
+                                </div>
+                                <div class="col-sm-3">
+                                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Gender)</label>
+                            @Html.DisplayFor(model => model.Gender)
+                            <div class="col-sm-7">
+                                @Html.RadioButtonFor(model => model.Gender, IAAI_ARM64.Models.EnumList.Gender.男, new { id = "Gender_男" }) @Html.Label("Gender_男", "男")
+                                @Html.RadioButtonFor(model => model.Gender, IAAI_ARM64.Models.EnumList.Gender.女, new { id = "Gender_女" }) @Html.Label("Gender_女", "女")
+                            </div>
+
+                            <div class="col-sm-3">
+                                @if (!Html.ViewData.ModelState.IsValidField("Gender"))
+                                {
+                                    <span class="alertred">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                    </span>
+                                }
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Email)</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "請輸入Email" })
+
+                            </div>
+                            <div class="col-sm-3">
+                                @if (!Html.ViewData.ModelState.IsValidField("Email"))
+                                {
+                                    <span class="alertred">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </span>
+                                }
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Phone)</label>
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", placeholder = "請輸入連絡電話" })
+
+                            </div>
+                            <div class="col-sm-3">
+                                @if (!Html.ViewData.ModelState.IsValidField("Phone"))
+                                {
+                                    <span class="alertred">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                    </span>
+                                }
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Html.LabelFor(model => model.Message)</label>
+                            <div class="col-sm-10">
+                                @*@Html.TextAreaFor(model => model.Message, htmlAttributes: new { placeholder = "請輸入詢問內容", rows = "10", })*@
+                                @Html.TextAreaFor(model => model.Message, new { @class = "form-control", placeholder = "請輸入信息", rows = "10", cols = "20", id = "Message" })
+
+                            </div>
+                            <div class="col-sm-3">
+                                @if (!Html.ViewData.ModelState.IsValidField("Message"))
+                                {
+                                    <span class="alertred">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                                    </span>
+                                }
+                            </div>
+                        </div>
+
+
+                        @Html.LabelFor(model => model.Captcha, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <br />
+                        <div style="padding-left:120px">
+                            @Html.MathCaptcha()
+                            <p class="text-danger">  @ViewBag.ErrMessage </p>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button class="btn btn-primary solid blank" type="submit">送 出</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            @if (TempData["SuccessMessage"] != null)
+                            {
+                                <div class="alert alert-success">
+                                    <strong>發送成功!</strong> 您已經將訊息傳達給我們。請耐心等待我們的回覆，謝謝。
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                }
+                <div class="tags-area clearfix">
+                    <div class="share-items pull-right">
+                        <ul class="post-social-icons unstyled">
+                            <li>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Content Col end -->
+            <!-- 內容結束 -->
+        </div>
+        <!-- Main row end -->
+    </div>
+    <!-- Conatiner end -->
+</section>
+
+
