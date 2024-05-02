@@ -52,14 +52,14 @@ IAAI-TW縱火平台專案主要負責後端以及後台系統開發，後台需�
  <img src="IAAI_ARM64/IAAI_img/KnowledgeIndex.png" width="60%" alt="YHOME2">
 </p>
 <p align="center">
- <img src="IAAI_ARM64/IAAI_img/KnowledgeDB.png" width="60%" alt="YHOME2">
+ <img src="IAAI_ARM64/IAAI_img/KnoledgeDB" width="60%" alt="YHOME2">
 </p>
 * 聯絡我們前台 ＆ 後台：
 <p align="center">
  <img src="IAAI_ARM64/IAAI_img/ContactIndex.png" width="60%" alt="YINDEX">
 </p>
 <p align="center">
- <img src="IAAI_ARM64/IAAI_img/ContactDB.png" width="60%" alt="YINDEX">
+ <img src="IAAI_ARM64/IAAI_img/ContactUsDB.png.png" width="60%" alt="YINDEX">
 </p>
 
   ---
