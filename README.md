@@ -2,7 +2,7 @@
 
 <h1 align="center">TAYANA Yacht ｜後台管理系統</h1>
 <p align="center">
- <img src="img/yachts2.jpg" width="60%" alt="yachts2">
+ <img src="IAAI_ARM64/IAAI_img/MasterPage.jpg" width="60%" alt="yachts2">
 </p>
 
 ---
