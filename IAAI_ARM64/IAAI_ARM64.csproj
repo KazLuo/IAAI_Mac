@@ -375,6 +375,14 @@
     <Content Include="HTML\member_reg.html" />
     <Content Include="HTML\news.html" />
     <Content Include="HTML\news_show.html" />
+    <Content Include="IAAI_img\ContactIndex.png" />
+    <Content Include="IAAI_img\ContactUsDB.png" />
+    <Content Include="IAAI_img\KnoledgeDB.png" />
+    <Content Include="IAAI_img\KnowledgeIndex.png" />
+    <Content Include="IAAI_img\MasterPage.jpg" />
+    <Content Include="IAAI_img\MasterPageCreate.png" />
+    <Content Include="IAAI_img\截圖 2024-05-02 下午6.38.14.png" />
+    <Content Include="IAAI_img\截圖 2024-05-02 下午6.38.49.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
